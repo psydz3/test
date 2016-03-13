@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+ <form action="action_page.php">
+  <p>A
+  <input type="radio" name="A" value="Yes"> Yes
+  <input type="radio" name="A" value="N/A" checked> N/A
+  <input type="radio" name="A" value="No"> No<br><br>
+  </p>
+  
+  <p>B
+  <input type="radio" name="B" value="Yes"> Yes
+  <input type="radio" name="B" value="N/A" checked> N/A
+  <input type="radio" name="B" value="No"> No<br><br>
+  </p>
+  
+  <p>C
+  <input type="radio" name="C" value="Yes"> Yes
+  <input type="radio" name="C" value="N/A" checked> N/A
+  <input type="radio" name="C" value="No"> No<br><br>
+  </p> 
+  <p>D
+  <input type="radio" name="D" value="Yes"> Yes
+  <input type="radio" name="D" value="N/A" checked> N/A
+  <input type="radio" name="D" value="No"> No<br><br>
+  <input type="submit"></p>
+</form> 
+
+<style>
+table {
+    width:100%;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+table#t01 tr:nth-child(even) {
+    background-color: #eee;
+}
+table#t01 tr:nth-child(odd) {
+   background-color:#fff;
+}
+table#t01 th  {
+    background-color: black;
+    color: white;
+}
+</style>
+
+  
+<table id="t01">
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>    
+    <th>Points</th>
+  </tr>
+  <tr>
+    <td>Jill</td>
+    <td>Smith</td>    
+    <td>50</td>
+  </tr>
+  <tr>
+    <td>Eve</td>
+    <td>Jackson</td>    
+    <td>94</td>
+  </tr>
+  <tr>
+    <td>John</td>
+    <td>Doe</td>    
+    <td>80</td>
+  </tr>
+</table>
+
+<?php
+
+$connection = mysqli_connect('localhost','root','123456','test');
+
+if (!$connection)
+    die("hehe")
+//mysql_select_db('test',$connection);
+
+/* show tables */
+$result = mysqli_query($connection, "select Options, Yes, N/A, No from alphbet");
+if (mysqli_num_rows($result) > 0){
+  echo '<table>';
+  echo '<tr><th>Options</th><th>Yes</th><th>N/A</th><th>No</th></tr>';
+  while ($row = mysqli_fetch_assoc($result)) {
+    echo '<tr>';# code...
+      
+        echo "<td>".$row["Options"]."</td><td>".$row["Yes"]."</td><td>".$row["N/A"]."</td><td>".$row["No"]."</td>";
+      
+    echo '</tr>';
+  }
+  echo '</table>'
+}
+
+
+?>
+
+</body>
+
+</html>
